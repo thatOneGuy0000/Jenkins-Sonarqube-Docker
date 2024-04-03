@@ -1,0 +1,29 @@
+JENKINS: 18.234.142.60
+SONARQUBE: 34.194.244.98
+DOCKER: 
+
+Step #1
+- set up EC2 for jenkins, sonarqube, docker servers
+
+Step #2 - Set up Jenkins 
+- Download jenkins on server
+- set hostname 
+    - hostnamectl set-hostname jenkins
+    - /bin/bash
+    - add sonarQuber scanner plugin
+
+- Naviage to jenkins webpage -- server:8080
+    - get secret password and note it 
+    - ubuntu@jenkins:~$ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+        ae38aa2881524f07b5b33bfc63a1495a
+
+- SonarQube global token from http://34.194.244.98:9000 > settings
+	- sqa_97da65fb1c58c4285cc73c7941bc552bd4bd5d6b
+- Manage Jenkins > Add this to jenkins sonarqube server config
+- Automated Pipeline > Configure
+	- Add Build Step > Execute from SonarQube Scanner
+	- Analysis Properties: sonar.projectKey=Website
+	- Save
+
+- 
+    
