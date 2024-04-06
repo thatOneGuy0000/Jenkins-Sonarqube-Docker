@@ -56,9 +56,7 @@ Step #3
 			- run command: -->  ssh-copy-id ubuntu@44.210.140.162
 		-- ssh into docker again --> ssh ubuntu@44.210.140.162
 			- now we see we can get in, without having to put password :)
-		- 
-
-
+		-
 
 
 
