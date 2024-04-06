@@ -1,6 +1,6 @@
 JENKINS: 18.234.142.60
 SONARQUBE: 34.194.244.98
-DOCKER: 
+DOCKER: 44.210.140.162
 
 Step #1
 - set up EC2 for jenkins, sonarqube, docker servers
@@ -25,5 +25,51 @@ Step #2 - Set up Jenkins
 	- Analysis Properties: sonar.projectKey=Website
 	- Save
 
-- 
-    
+Step #3
+- Set up Docker EC2 if you haven't -- 44.210.140.162
+	- SSH into docker from macbook
+	- ssh -i SSH-KEY-Jenkins.pem ubuntu@44.210.140.162
+- We are in new docker EC2 instance now
+	- Run update command ..
+		- sudo apt update
+- Follow commands from https://docs.docker.com/engine/install/ubuntu
+	- Docker is installed
+
+- Two things now on docker and jenkins server
+	1. Jenkins server
+		- sudo su jenkins
+		- ssh into other docker --> ssh ubuntu@44.210.140.162 --> pubkey denied
+		- Go to docker server --> switch to root --> sudo su 
+		- Now we are in root@Docker
+		- edit sshd_config --> nano /etc/ssh/sshd_config
+			- set pubkey to yes, and password authentication to yes
+			- KbdInteractiveAuthentication yes
+			- run command: systemctl restart sshd 
+		- set unbuntu password for docker --> passwd ubuntu
+		- Now try to login from jenkins user --> ssh ubuntu@44.210.140.162
+		- and we are able to get into ubuntu user :)))))))))
+
+	2. Now we are able to ssh into docker user lets go back to jenkins user
+		- jenkins@jenkins:/home/ubuntu$
+		- run command: --> ssh-keygen
+			- SHA256:Gt1poYUFMiXpXBsmkH1QVSIMzAcoj2tCoXSKx7Wfu1I jenkins@jenkins
+			- run command: -->  ssh-copy-id ubuntu@44.210.140.162
+		-- ssh into docker again --> ssh ubuntu@44.210.140.162
+			- now we see we can get in, without having to put password :)
+		- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
